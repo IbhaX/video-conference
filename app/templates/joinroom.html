@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container mx-auto flex justify-center items-center h-screen">
+  <div class="max-w-xl bg-white rounded-md shadow-md p-8">
+    <h1 class="text-4xl font-semibold mb-6">Join a Room</h1>
+    <form action="{% url 'join_room' %}" method="POST">
+      {% csrf_token %}
+      <div class="mb-6">
+        <label for="roomID" class="text-sm font-medium text-gray-600 block">Room ID</label>
+        <input type="text" id="roomID" name="roomID" placeholder="Enter room ID"
+          class="mt-1 p-4 w-full border rounded-md">
+      </div>
+      <button type="submit"
+        class="bg-blue-500 text-white py-3 px-6 rounded-md inline-block mb-6 hover:bg-blue-600 transition">Join</button>
+      <div class="text-center">
+        {% if success %}
+        <p class="text-green-500 text-lg"><b>{{ success }}</b></p>
+        {% endif %}
+        {% if error %}
+        <p class="text-red-500 text-lg">{{ error }}</p>
+        {% endif %}
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock content %}
